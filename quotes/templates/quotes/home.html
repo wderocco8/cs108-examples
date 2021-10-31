@@ -1,0 +1,15 @@
+<!-- quotes/home.html -->
+
+<h1>Showing All Quotes</h1>
+
+<!-- display th econtext data 
+{quote}  = incorrect template context variable
+-->
+
+<!-- create a loop to display the quotes -->
+<ul>
+{% for quote in quotes %}
+<li>{{quote.text}} - {{quote.author}}</li>
+    <img src="{{quote.image_url}}" style="max-width: 400;">
+{% endfor %}
+</ul>

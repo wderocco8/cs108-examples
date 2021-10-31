@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hello_world.apps.HelloWorldConfig',
-    'pages.apps.PagesConfig', #new application!
+    'pages.apps.PagesConfig', 
+    'quotes.apps.QuotesConfig', #new application!
 ]
 
 MIDDLEWARE = [
@@ -59,6 +60,7 @@ TEMPLATES = [
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
+            'string_if_invalid':"NameError: the template context variable [%s] is not defined.",
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',

@@ -1,1 +1,1 @@
-https://sheltered-inlet-95645.herokuapp.com/
+https://sheltered-inlet-95645.herokuapp.com/quotes

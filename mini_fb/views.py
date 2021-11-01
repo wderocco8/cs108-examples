@@ -8,5 +8,5 @@ from django.views.generic import ListView
 class ShowAllProfilesView(ListView):
     '''Show a listing of Quotes.'''
     model = Profile # retrieve Profile objects from the database
-    template_name = "show_all_profiles.html"
+    template_name = "mini_fb.html"
     context_object_name = "profiles"

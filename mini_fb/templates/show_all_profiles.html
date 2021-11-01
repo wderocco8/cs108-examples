@@ -1,0 +1,24 @@
+<!-- mini_fb/show_all_profiles.html -->
+
+<h1>Showing All Profiles</h1>
+
+<table>
+    <b>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Hometown</th>
+            <th>Email Address</th>
+            <th>Image</th>
+        </tr>    
+    </b>
+    {% for profile in profiles %}
+        <tr>
+            <th>{{profile.first_name}}</th>
+            <th>{{profile.last_name}}</th>
+            <th>{{profile.city}}</th>
+            <th>{{profile.email_address}}</th>
+            <th><img src="{{profile.image_url}}" style="max-width: 200;"></th>
+        </tr>
+    {% endfor %}
+</table>

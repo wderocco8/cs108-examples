@@ -9,7 +9,9 @@
 <!-- create a loop to display the quotes -->
 <ul>
 {% for quote in quotes %}
-<li>{{quote.text}} - {{quote.author}}</li>
-    <img src="{{quote.image_url}}" style="max-width: 400;">
+    <li>{{quote.text}} - {{quote.author}}<br>
+        <img src="{{quote.image_url}}" style="max-width: 400;">
+
+    </li>
 {% endfor %}
 </ul>

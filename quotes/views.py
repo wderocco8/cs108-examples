@@ -1,7 +1,7 @@
 from django.db import models
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from .models import Quote
+from .models import Person, Quote, Person
 import random
 
 
@@ -31,3 +31,10 @@ class RandomQuotePageView(DetailView):
         # selct on at random
         q = random.choice(quotes)        
         return q
+
+
+class PersonPageView(DetailView):
+    '''Display a single person object.'''
+    model = Person                       # retrieve Person objects from the database
+    template_name = "quotes/person.html" # delegate the display to this template
+    context_object_name = "person"       # use this variable name in the template

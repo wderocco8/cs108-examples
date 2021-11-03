@@ -1,0 +1,9 @@
+<!-- mini_fb/show_profile_page.html -->
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+
+<b>{{ profile.name }}</br>
+<img src="{{profile.image_url}}" style="max-width: 400;">
+
+{% endblock %}

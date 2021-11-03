@@ -3,7 +3,22 @@
 
 {% block content %}
 
-<b>{{ profile.name }}</br>
+<b>{{profile.name}}</br>
 <img src="{{profile.image_url}}" style="max-width: 400;">
+
+
+<table>
+    <b>
+        <tr>
+            <th>Time</th>
+            <th>Message</th>
+        </tr>    
+    </b>
+    {% for messages in profile.get_status_messages %}
+        <tr>
+            <td>{{messages.timestamp}}</td>
+            <td>{{messages.message}}</td>
+        </tr>
+    {% endfor %}
 
 {% endblock %}

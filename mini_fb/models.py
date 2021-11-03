@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.deletion import CASCADE
 
 # Create your models here.
 
@@ -17,3 +18,22 @@ class Profile(models.Model):
         '''Return a string representation of profile.'''
 
         return f'{self.name} {self.city} {self.email_address} {self.image_url}'
+
+    def get_status_messages(self):
+        '''Obtain status messages for a Profile.'''
+
+        # use the object manager to filter messages by this profile's pk:
+        return StatusMessage.objects.filter(profile=self)
+
+
+class StatusMessage(models.Model):
+    '''Model the data attributes of Facebook status message.'''
+
+    # data attributes:
+    timestamp = models.TextField(blank=True)
+    message = models.TextField(blank=True)
+    profile = models.ForeignKey(Profile, on_delete=CASCADE)
+    
+    def __str__(self):
+        '''Return the string representation of Status Message.'''
+        return f'{self.timestamp} {self.message}'

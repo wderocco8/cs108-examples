@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.db.models.deletion import CASCADE
 import random
 
@@ -47,6 +48,12 @@ class Quote(models.Model):
        '''Return a string representation of this quote.'''
 
        return f'"{self.text}" - {self.person}'
+
+    def get_absolute_url(self):
+        '''Provide a url to show this object.'''
+
+        # 'quote/<int:pk>'
+        return reverse('quote', kwargs={'pk':self.pk})
 
 
 class Image(models.Model):

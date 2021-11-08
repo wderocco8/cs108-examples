@@ -1,4 +1,6 @@
 <!-- mini_fb/show_all_profiles.html -->
+{% extends 'mini_fb/base.html' %}
+{% block content %}
 
 <h1>Showing All Profiles</h1>
 
@@ -13,7 +15,7 @@
     </b>
     {% for profile in profiles %}
         <tr>
-            <th><a href="{% url 'show_profile_page' profile.pk %}">{{profile.name}}</a></th>
+            <th><a href="{% url 'show_profile_page' profile.pk %}">{{profile.first_name}} {{profile.last_name}}</a></th>
             <!-- <th>{{profile.last_name}}</th> -->
             <th>{{profile.city}}</th>
             <th>{{profile.email_address}}</th>
@@ -21,3 +23,5 @@
         </tr>
     {% endfor %}
 </table>
+
+{% endblock %}

@@ -3,10 +3,11 @@
 
 {% block content %}
 
-<b>{{profile.name}}</br>
-<img src="{{profile.image_url}}" style="max-width: 400;">
+<b>{{profile.first_name}} {{profile.last_name}}</br>
+<img src="{{profile.image_url}}" style="max-width: 400;"></br>
 
-
+<a href="{% url 'update_profile' profile.pk %}">Edit this profile</a>
+<hr>
 <table>
     <b>
         <tr>

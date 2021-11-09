@@ -1,6 +1,7 @@
 from django.db import models
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse
 from .models import Person, Quote, Person
 from .forms import CreateQuoteForm, UpdateQuoteForm
 import random
@@ -53,3 +54,23 @@ class UpdateQuoteView(UpdateView):
     model = Quote # which model to Update
     form_class = UpdateQuoteForm # which form to use to update the Quote
     template_name = "quotes/update_quote_form.html" # delegate the display to this template
+
+
+class DeleteQuoteView(DeleteView):
+    '''Delete a Quote object and store it in the database.'''
+    
+    template_name = "quotes/delete_quote.html" # delegate the display to this template
+    queryset = Quote.objects.all()
+    # success_url = "../../all" # what to do after deleting a quote
+
+    def get_success_url(self):
+        '''Return a URL to which we should be directed after the delete.'''
+
+        # get the pk for this quote
+        pk = self.kwargs.get('pk')
+        quote = Quote.objects.filter(pk=pk).first() # get one object from queryset
+
+        # find the person associated with this quote
+        person = quote.person
+        return reverse('person', kwargs={'pk':person.pk})
+        # reverse to show the person page

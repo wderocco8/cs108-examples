@@ -8,18 +8,35 @@
 
 <a href="{% url 'update_profile' profile.pk %}">Edit this profile</a>
 <hr>
-<table>
+
+<h3>Post a status message</h3>
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Share">
+            </td>
+        </tr>
+    </table>
+</form>
+
+
+{% endblock %}
+
+
+<!-- <table>
     <b>
         <tr>
             <th>Time</th>
             <th>Message</th>
         </tr>    
-    </b>
+    </b> 
     {% for messages in profile.get_status_messages %}
         <tr>
             <td>{{messages.timestamp}}</td>
             <td>{{messages.message}}</td>
         </tr>
-    {% endfor %}
-
-{% endblock %}
+    {% endfor %} -->

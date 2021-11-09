@@ -2,19 +2,15 @@
 {% extends 'quotes/base.html' %}
 
 {% block content %}
-
 <h1>All quotes by {{person}}</h1>
-
-<!-- 
-    <img src='{{person.get_random_image}}' style='width:200'> 
--->
 
 <!-- all quotes by this person -->
 <ul>
- {% for quote in person.get_all_quotes %}
-    <li>{{quote.text}}</li>
+{% for quote in person.get_all_quotes %}
+    <li>{{quote.text}}<br>
         <a href="{% url 'delete_quote' quote.pk %}">delete</a>
-{% endfor %}   
+    </li>
+{% endfor %}
 </ul>
 
 <h2>All images of {{person}}</h2>
@@ -22,8 +18,17 @@
 <!-- all images for this person -->
 <ul>
 {% for image in person.get_all_images %}
-    <li><img src='{{image}}' style="width:200"></li>
-{% endfor %}   
-   </ul>
+    <li><img src='{{image}}' style='width:200'> </li>
+{% endfor %}
+</ul>
 
-   {% endblock %}
+<h2>Upload an Image of {{person.name}}</h2>
+
+<form method='POST' enctype="multipart/form-data" 
+    action="{% url 'add_image' person.pk %}">
+    {% csrf_token %}
+    {{ add_image_form.as_p}}
+    <input type="submit" value="upload">
+</form>
+
+{% endblock %}

@@ -28,4 +28,5 @@ urlpatterns = [
     path('mini_fb/', include('mini_fb.urls')),
 ]
 
+# add the MEDIA_URL to the list of project-level urls
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

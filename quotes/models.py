@@ -59,10 +59,16 @@ class Quote(models.Model):
 class Image(models.Model):
     '''Represent an image URL for a Person.'''
 
-    image_url = models.URLField(blank=True) # return as a string
-    image_file = models.ImageField(blank=True) # an actual image (preferrable)
+    image_url = models.URLField(blank=True)      ## unchanged
+    image_file = models.ImageField(blank=True)  ## new field
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
 
     def __str__(self):
         '''Return the image url of this Image.'''
-        return self.image_url
+
+        # if we have stored an actual image object:
+        if self.image_file:
+            return self.image_file.url
+        # otherwise, return the URL to an image stored elsewhere
+        else:
+            return self.image_url

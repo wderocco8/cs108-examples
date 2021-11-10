@@ -48,7 +48,7 @@ def post_status_message(request, pk):
     '''
     Process a form submission to post a new status message.
     '''
-
+    print("post_status_message")
     # if and only if we are processing a POST request, try to read the data
     if request.method == 'POST':
 
@@ -56,7 +56,7 @@ def post_status_message(request, pk):
 
         # create the form object from the request's POST data
         form = CreateStatusMessageForm(request.POST or None)
-
+        print(form)
         if form.is_valid():
 
             # create the StatusMessage object with the data in the CreateStatusMessageForm

@@ -30,9 +30,9 @@ class UpdateProfileForm(forms.ModelForm):
 
 class CreateStatusMessageForm(forms.ModelForm):
     '''A form to create Status Message for Profile object.'''
-    timestamp = forms.DateTimeField()
+    # timestamp = forms.DateTimeField()
 
     class Meta:
         '''additional data about this form'''
         model = StatusMessage
-        fields = ['timestamp', 'message', 'profile']
+        fields = ['message']

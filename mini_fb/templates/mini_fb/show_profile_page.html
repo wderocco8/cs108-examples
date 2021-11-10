@@ -10,10 +10,10 @@
 <hr>
 
 <h3>Post a status message</h3>
-<form method="POST">
+<form method="POST" action="/mini_fb/profile/{{profile.pk}}/post_status">
     {% csrf_token %}
     <table>
-        {{form.as_table}}
+        {{create_status_form.as_table}}
         <tr>
             <td></td>
             <td>
@@ -23,11 +23,7 @@
     </table>
 </form>
 
-
-{% endblock %}
-
-
-<!-- <table>
+<table>
     <b>
         <tr>
             <th>Time</th>
@@ -39,4 +35,8 @@
             <td>{{messages.timestamp}}</td>
             <td>{{messages.message}}</td>
         </tr>
-    {% endfor %} -->
+    {% endfor %}
+
+{% endblock %}
+
+

@@ -38,7 +38,7 @@ class StatusMessage(models.Model):
     '''Model the data attributes of Facebook status message.'''
 
     # data attributes:
-    timestamp = models.TextField(blank=True)
+    timestamp = models.DateTimeField(auto_now=True)
     message = models.TextField(blank=True)
     profile = models.ForeignKey(Profile, on_delete=CASCADE)
     

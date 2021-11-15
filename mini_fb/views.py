@@ -48,15 +48,15 @@ def post_status_message(request, pk):
     '''
     Process a form submission to post a new status message.
     '''
-    print("post_status_message")
+    # print("post_status_message") --> debugging
     # if and only if we are processing a POST request, try to read the data
     if request.method == 'POST':
 
         # print(request.POST) # for debugging at the console
 
         # create the form object from the request's POST data
-        form = CreateStatusMessageForm(request.POST or None)
-        print(form)
+        form = CreateStatusMessageForm(request.POST or None, request.FILES or None) # files necessary for image
+        # print(form) --> debugging
         if form.is_valid():
 
             # create the StatusMessage object with the data in the CreateStatusMessageForm
@@ -71,6 +71,11 @@ def post_status_message(request, pk):
             # now commit to database
             status_message.save()
 
+            image = form.save(commit=False) # create image object, but don't save
+            image.profile = profile
+            image.save()
+
     # redirect the user to the show_profile_page view
     url = reverse('show_profile_page', kwargs={'pk': pk})
+    print(url)
     return redirect(url)

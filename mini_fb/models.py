@@ -40,8 +40,13 @@ class StatusMessage(models.Model):
     # data attributes:
     timestamp = models.DateTimeField(auto_now=True)
     message = models.TextField(blank=True)
-    profile = models.ForeignKey(Profile, on_delete=CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    image = models.ImageField(blank=True)
     
     def __str__(self):
         '''Return the string representation of Status Message.'''
-        return f'{self.timestamp} {self.message}'
+        # if self.image:
+        #     return self.image.url
+
+        # else:
+        return f'{self.timestamp} {self.message} {self.image}'

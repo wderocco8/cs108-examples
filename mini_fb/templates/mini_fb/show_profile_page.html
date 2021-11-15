@@ -10,7 +10,7 @@
 <hr>
 
 <h3>Post a status message</h3>
-<form method="POST" action="/mini_fb/profile/{{profile.pk}}/post_status">
+<form method="POST" action="/mini_fb/profile/{{profile.pk}}/post_status" enctype="multipart/form-data">
     {% csrf_token %}
     <table>
         {{create_status_form.as_table}}
@@ -32,8 +32,14 @@
     </b> 
     {% for messages in profile.get_status_messages %}
         <tr>
-            <td>{{messages.timestamp}}</td>
-            <td>{{messages.message}}</td>
+            <td>{{messages.timestamp}}
+                
+            </td>
+            <td>{{messages.message}} </br>
+                {% if messages.image %}
+                <img src='{{messages.image.url}}' style='max-width: 200;'>
+                {% endif %}
+            </td>
         </tr>
     {% endfor %}
 

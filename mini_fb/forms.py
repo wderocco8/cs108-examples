@@ -31,8 +31,9 @@ class UpdateProfileForm(forms.ModelForm):
 class CreateStatusMessageForm(forms.ModelForm):
     '''A form to create Status Message for Profile object.'''
     # timestamp = forms.DateTimeField()
+    image = forms.ImageField(label="Image File", required=False)
 
     class Meta:
         '''additional data about this form'''
         model = StatusMessage
-        fields = ['message']
+        fields = ['message', 'image', 'profile']

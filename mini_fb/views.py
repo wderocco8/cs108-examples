@@ -1,6 +1,7 @@
+from django.db.models.query import QuerySet
 from django.shortcuts import render
-from mini_fb.models import Profile
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from mini_fb.models import Profile, StatusMessage
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .forms import CreateProfileForm, UpdateProfileForm, CreateStatusMessageForm
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -79,3 +80,40 @@ def post_status_message(request, pk):
     url = reverse('show_profile_page', kwargs={'pk': pk})
     print(url)
     return redirect(url)
+
+class DeleteStatusMessageView(DeleteView):
+    '''View to delete a status message'''
+    QuerySet = StatusMessage.objects.all()
+    template_name = "mini_fb/delete_status_form.html"
+
+    def get_context_data(self, **kwargs):
+        '''Return the context data (a dictionary) to be used in the template.'''
+
+        # obtain the default context data (a dictionary) from the superclass; 
+        # this will include the Profile record to display for this page view
+        context = super(DeleteStatusMessageView, self).get_context_data(**kwargs)
+        st_msg = StatusMessage.objects.get(pk=self.kwargs['status_pk'])
+        context['st_msg'] = st_msg
+        # return this context dictionary
+        return context
+
+    def get_object(self):
+        '''Return the status message of an object that should be deleted'''
+        # read the URL data values into variables
+        profile_pk = self.kwargs['profile_pk']
+        status_pk = self.kwargs['status_pk']
+
+        status = StatusMessage.objects.get(pk=status_pk)
+
+        # find the StatusMessage object, and return it        
+        return status
+
+    def get_success_url(self):
+        '''Provide a URL for after a status message is deleted'''
+        # read the URL data values into variables
+        profile_pk = self.kwargs['profile_pk']
+        status_pk = self.kwargs['status_pk']
+
+
+        # reverse to show the person page
+        return reverse('show_profile_page', kwargs={'pk':profile_pk})

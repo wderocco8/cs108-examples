@@ -23,24 +23,30 @@
     </table>
 </form>
 
+<hr>
 <table>
     <b>
         <tr>
             <th>Time</th>
             <th>Message</th>
+            <th></th>
         </tr>    
     </b> 
-    {% for messages in profile.get_status_messages %}
+    {% for message in profile.get_status_messages %}
         <tr>
-            <td>{{messages.timestamp}}
+            <td>{{message.timestamp}}
                 
             </td>
-            <td>{{messages.message}} </br>
-                {% if messages.image %}
-                <img src='{{messages.image.url}}' style='max-width: 200;'>
+            <td>{{message.message}} </br>
+                {% if message.image %}
+                <img src='{{message.image.url}}' style='max-width: 200;'>
                 {% endif %}
             </td>
+            <td>
+                <a href="{% url 'delete_status' profile_pk=profile.pk status_pk=message.pk %}">Delete</a>
+            </td>
         </tr>
+ 
     {% endfor %}
 
 {% endblock %}

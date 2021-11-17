@@ -6,7 +6,8 @@
 <b>{{profile.first_name}} {{profile.last_name}}</br>
 <img src="{{profile.image_url}}" style="max-width: 400;"></br>
 
-<a href="{% url 'update_profile' profile.pk %}">Edit this profile</a>
+<a href="{% url 'update_profile' profile.pk %}">Edit this profile</a> |
+<a href="{% url 'news_feed' profile.pk %}">Show {{profile.first_name}}'s News Feed</a>
 <hr>
 
 <h3>Post a status message</h3>
@@ -24,6 +25,7 @@
 </form>
 
 <hr>
+{% if profile.get_status_messages %} <!-- Only display this content if the profile has status updates -->
 <table>
     <b>
         <tr>
@@ -48,8 +50,9 @@
         </tr>
     {% endfor %}    
 </table>
-
 <hr>
+{% endif %}
+
 <h2>{{profile.first_name}}'s Friends</h2>
 {% if profile.get_friends %}
 <table>

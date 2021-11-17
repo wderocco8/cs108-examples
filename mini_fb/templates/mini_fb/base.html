@@ -1,14 +1,18 @@
 <!-- mini_fb/base.html -->
-<html>
 
+<html>
 <h3>Mini Facebook</h3>
     <body>
         <a href="{% url 'show_all_profiles' %}">MiniFacebook Home</a> | 
         <a href="{% url 'create_profile' %}">Create Profile</a>
+<hr>
     </br></br>
     
         {% block content %}
         {% endblock %}
     </body>
-    
+
+<hr>
+Created by William De Rocco (wderocco@bu.edu)
 </html>
+

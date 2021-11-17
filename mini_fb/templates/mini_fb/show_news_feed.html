@@ -1,0 +1,27 @@
+<!-- show_news_feed.html -->
+<html style="background-color: rgb(177, 209, 214);">
+  <a href="{% url 'show_profile_page' profile.pk %}">Back to {{profile.first_name}}'s profile page</a>
+<hr>
+<h2>{{profile.first_name}}'s News Feed</h2>
+<table>
+    {% for news in profile.get_news_feed %}
+        <tr>
+            <td>
+                {{news.timestamp}}
+            </td>
+            <td>
+                <a href="{% url 'show_profile_page' news.profile.pk %}">{{news.profile.first_name}} {{news.profile.last_name}}</a>
+            </td>
+            <td>
+                {{news.message}}</br>
+                {% if news.image %}
+                <img src='{{news.image.url}}' style='max-width: 200;'>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}    
+</table>
+<hr>
+Created by William De Rocco (wderocco@bu.edu)
+  
+</html>

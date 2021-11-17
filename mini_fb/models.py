@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.query import QuerySet
 from django.urls import reverse
 from django.db.models.deletion import CASCADE
 
@@ -8,18 +9,18 @@ class Profile(models.Model):
     '''Represents profile involving name, hometown, and a profile pic'''
 
     # data attributes:
-    # name = models.TextField(blank=True)
     first_name = models.TextField(blank=True)
     last_name = models.TextField(blank=True)
     birth_date = models.DateField(null=True, blank=True)
     city = models.TextField(blank=True)
     email_address = models.TextField(blank=True)
     image_url = models.URLField(blank=True)
+    friends = models.ManyToManyField("self", blank=True) # allow any Profile object to have other Profile objects as friends
 
     def __str__(self):
         '''Return a string representation of profile.'''
 
-        return f'{self.first_name} {self.last_name} {self.city} {self.email_address} {self.image_url}'
+        return f'{self.first_name} {self.last_name}'
 
     def get_status_messages(self):
         '''Obtain status messages for a Profile.'''
@@ -33,6 +34,10 @@ class Profile(models.Model):
 
         return reverse('show_profile_page', kwargs={'pk':self.pk})
 
+    def get_friends(self):
+        '''Returns all the friends for a Profile.'''
+        
+        return self.friends.all()
 
 class StatusMessage(models.Model):
     '''Model the data attributes of Facebook status message.'''

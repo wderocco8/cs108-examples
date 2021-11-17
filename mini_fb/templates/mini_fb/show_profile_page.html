@@ -46,9 +46,29 @@
                 <a href="{% url 'delete_status' profile_pk=profile.pk status_pk=message.pk %}">Delete</a>
             </td>
         </tr>
- 
+    {% endfor %}    
+</table>
+
+<hr>
+<h2>{{profile.first_name}}'s Friends</h2>
+{% if profile.get_friends %}
+<table>
+    {% for friend in profile.get_friends %}
+    <tr>
+        <td>
+            <a href="{% url 'show_profile_page' friend.pk %}">{{friend}}</a>
+        </td>
+        <td>
+            <img src='{{friend.image_url}}' style='max-width: 100;'>
+        </td>
+    </tr>
     {% endfor %}
+</table>
+{% else %}
+{{profile.first_name}} doesn't have any friends.
+{% endif %}
 
 {% endblock %}
+
 
 

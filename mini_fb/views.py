@@ -124,3 +124,65 @@ class ShowNewsFeedView(DetailView):
     model = Profile
     template_name = "mini_fb/show_news_feed.html"
     context_object_name = "profile"
+
+
+class ShowPossibleFriendsView(DetailView):
+    '''View to display a list of possible friends to add.'''
+    model = Profile
+    template_name = "mini_fb/show_possible_friends.html"
+    context_object_name = "profile"
+
+
+
+def add_friend(request, profile_pk, friend_pk):
+    '''
+    Process a form submission to add a friend.
+    '''
+    # print(request.POST) # for debugging at the console
+    
+    # identify profile making the request
+    profile = Profile.objects.get(pk=profile_pk)
+    
+    # identify friend being requested
+    friend = Profile.objects.get(pk=friend_pk)
+    
+    # add friend to list of profile object's friends
+    profile.friends.add(friend)
+
+    # save this modified profile
+    profile.save()
+    
+    # redirect the user to the show_profile_page view
+    url = reverse('show_profile_page', kwargs={'pk': profile_pk})
+    return redirect(url)
+    
+    # # if and only if we are processing a POST request, try to read the data
+    # if request.method == 'POST':
+
+    #     # print(request.POST) # for debugging at the console
+
+    #     # create the form object from the request's POST data
+    #     form = CreateStatusMessageForm(request.POST or None, request.FILES or None) # files necessary for image
+    #     # print(form) --> debugging
+    #     if form.is_valid():
+
+    #         # create the StatusMessage object with the data in the CreateStatusMessageForm
+    #         status_message = form.save(commit=False) # don't commit to database yet
+
+    #         # find the profile that matches the `pk` in the URL
+    #         profile = Profile.objects.get(pk=pk)
+
+    #         # attach FK profile to this status message
+    #         status_message.profile = profile
+
+    #         # now commit to database
+    #         status_message.save()
+
+    #         image = form.save(commit=False) # create image object, but don't save
+    #         image.profile = profile
+    #         image.save()
+
+    # # redirect the user to the show_profile_page view
+    # url = reverse('show_profile_page', kwargs={'pk': pk})
+    # print(url)
+    # return redirect(url)

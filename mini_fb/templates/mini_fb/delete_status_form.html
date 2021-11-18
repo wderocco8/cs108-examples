@@ -15,17 +15,20 @@
 
 
 
-{% for messages in profile.get_status_messages %}
+
+<table>
 <tr>
-    <td>{{messages.timestamp}}
-        
+    <td>
+        {{st_msg.profile.timestamp.pk}}   
     </td>
-    <td>{{messages.message}} </br>
-        {% if messages.image %}
-        <img src='{{messages.image.url}}' style='max-width: 200;'>
+    <td>
+        {{profile.get_status_message.message.pk}} </br>
+        {% if profile.get_status_message.image %}
+        <img src='{{profile.get_status_message.image.url}}' style='max-width: 200;'>
         {% endif %}
     </td>
 </tr>
-{% endfor %}
+</table>
+
 
 {% endblock %}

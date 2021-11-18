@@ -1,0 +1,32 @@
+<!-- show_possible_friends.html -->
+<html style="background-color: rgb(238, 211, 122);">
+  <a href="{% url 'show_profile_page' profile.pk %}">Back to {{profile.first_name}}'s profile page</a>
+<hr>
+<h2>{{profile.first_name}}'s Friend Suggestions</h2>
+
+
+<table>
+    {% for suggestion in profile.get_friend_suggestions %}
+    <form method="POST" action="{% url 'add_friend' profile_pk=profile.pk friend_pk=suggestion.pk %}">
+    {% csrf_token %}
+        <tr>
+            <td>
+                {% if suggestion.image_url %}
+                <img src='{{suggestion.image_url}}' style='max-width: 100;'>
+                {% endif %}
+            </td>
+            <td>
+                {{suggestion.first_name}} {{suggestion.last_name}}
+            </td>
+            <td>
+                <input type="submit" value="Add Friend">
+            </td>
+        </tr>
+    </form>
+    {% endfor %}    
+</table>
+
+<hr>
+Created by William De Rocco (wderocco@bu.edu)
+  
+</html>

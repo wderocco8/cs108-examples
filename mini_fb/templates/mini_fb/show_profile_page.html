@@ -6,8 +6,10 @@
 <b>{{profile.first_name}} {{profile.last_name}}</br>
 <img src="{{profile.image_url}}" style="max-width: 400;"></br>
 
-<a href="{% url 'update_profile' profile.pk %}">Edit this profile</a> |
-<a href="{% url 'news_feed' profile.pk %}">Show {{profile.first_name}}'s News Feed</a>
+<a href="{% url 'update_profile' profile.pk %}">Edit this profile</a> | 
+<a href="{% url 'news_feed' profile.pk %}">Show {{profile.first_name}}'s News Feed</a> | 
+<a href="{% url 'possible_friends' profile.pk %}">Find Friends</a>
+
 <hr>
 
 <h3>Post a status message</h3>

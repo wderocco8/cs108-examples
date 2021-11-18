@@ -46,6 +46,13 @@ class Profile(models.Model):
 
         return news
 
+    def get_friend_suggestions(self):
+        '''Returns a QuerySet of all possible friends.'''
+        # create list of possible friends excluding current friends (use self.get_friends to identify existng PK's)
+        possible_friends = friend_suggestions = Profile.objects.all().exclude(pk__in=self.get_friends())
+
+        return possible_friends
+        
 class StatusMessage(models.Model):
     '''Model the data attributes of Facebook status message.'''
 

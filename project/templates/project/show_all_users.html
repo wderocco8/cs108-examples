@@ -1,0 +1,33 @@
+<!-- project/show_all_users.html -->
+{% extends 'project/base.html' %}
+{% block content %}
+
+<h1>Showing All Customers</h1>
+
+<table>
+    <b>
+        <tr>
+            <th>Name</th>
+            <th>Birthdate</th>
+            <th>Weight</th>
+            <th>Height</th>
+            <th>Hometown</th>
+            <th>Email</th>
+            <th>Image</th>
+        </tr>    
+    </b>
+    {% for user in users %}
+        <tr>
+            <td><a href="{% url 'show_user_page' user.pk%}" >{{user.first_name}} {{user.last_name}}</a></td>
+            <td>{{user.birthdate}}</td>
+            <td>{{user.weight}}lbs</td>
+            <td>{{user.height}}</td>
+            <td>{{user.city}}</td>
+            <td>{{user.email}}</td>
+            <td><img src="{{user.profile_picture}}" style="max-width: 200;"></td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}

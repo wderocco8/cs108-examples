@@ -1,0 +1,38 @@
+<!-- project/show_all_exercises.html -->
+{% extends 'project/base.html' %}
+{% block content %}
+
+<h1>Select Your Exercises!</h1>
+<a href="{% url 'create_exercise' %}">Create Exercise</a>
+
+<table>
+    <b>
+        <tr>
+            <th>Exercise Name</th>
+            <th>Description</th>
+            <th>Instructions</th>
+            <th>Image</th>
+            <th>Recommended Reps</th>
+            <th>Muscle Groups</th>
+        </tr>    
+    </b>
+    {% for exercise in exercises %}
+    <form method="POST">
+    {% csrf_token %}
+    
+        <tr>
+            <td>{{exercise.exercise_name}}</td>
+            <td>{{exercise.description}}</td>
+            <td>{{exercise.instructions}}</td>
+            <td><img src="{{exercise.image}}" style="max-width: 200;"></td>
+            <td>{{exercise.recommended_reps}}</td>
+            <td>{{exercise.muscle_groups}}</td>
+            <td>
+                <input type="submit" value="Add Exercise">
+            </td>
+        </tr>
+    </form>
+    {% endfor %}
+</table>
+
+{% endblock %}

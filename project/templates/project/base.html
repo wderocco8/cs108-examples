@@ -1,0 +1,18 @@
+<!-- project/base.html -->
+
+<html>
+<h3>Workout Planner</h3>
+    <body>
+        <a href="{% url 'home_page' %}">Project Home</a> | 
+        <a href="{% url 'all_users' %}">Find Customers</a> | 
+        <a href="{% url 'show_all_exercises' %}">Exercises</a> | 
+<hr>
+    </br></br>
+    
+        {% block content %}
+        {% endblock %}
+    </body>
+
+<hr>
+Created by William De Rocco (wderocco@bu.edu)
+</html>

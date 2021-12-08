@@ -17,24 +17,99 @@ class CreateExerciseForm(forms.ModelForm):
         fields = ['exercise_name', 'description', 'instructions', 'image_url', 'recommended_reps', 'muscle_groups']
 
 
-# class UpdateProfileForm(forms.ModelForm):
-#     '''A form to update a Profile object.'''
-#     city = forms.CharField(label="City", required=True)
-#     email_address = forms.CharField(label="Email Address", required=True)
-#     image_url = forms.CharField(label="Image URL", required=True)    
-#     birth_date = forms.DateField(widget=forms.SelectDateWidget(years=range(2012,1920,-1),),)
+class UpdateExerciseForm(forms.ModelForm):
+    '''A form to update a Exercise object.'''
+    exercise_name = forms.CharField(label="Exercise Name", required=True)
+    description = forms.CharField(label="Description", required=True)
+    instructions = forms.CharField(label="Instructions", required=True)
+    image = forms.CharField(label="Image URL,", required=True)
+    recommended_reps = forms.CharField(label="Recommended Reps", required=True)
+    muscle_groups = forms.CharField(label="Muscle Groups", required=True)
 
-#     class Meta:
-#         '''additional data about this form'''
-#         model = Profile
-#         fields = ['birth_date', 'city', 'email_address', 'image_url']
+    class Meta:
+        '''additional data about this form'''
+        model = Exercise
+        fields = ['exercise_name', 'description', 'instructions', 'image', 'recommended_reps', 'muscle_groups']
 
-# class CreateStatusMessageForm(forms.ModelForm):
-#     '''A form to create Status Message for Profile object.'''
-#     # timestamp = forms.DateTimeField()
-#     image = forms.ImageField(label="Image File", required=False)
 
-#     class Meta:
-#         '''additional data about this form'''
-#         model = StatusMessage
-#         fields = ['message', 'image', 'profile']
+class CreateUserForm(forms.ModelForm):
+    '''A form to create a User object.'''
+    first_name = models.TextField(blank=True)
+    last_name = models.TextField(blank=True)
+    birthdate = models.DateField(null=True, blank=True)
+    weight = models.TextField(blank=True)
+    height = models.TextField(blank=True)
+    city = models.TextField(blank=True)
+    email = models.TextField(blank=True)
+    profile_picture = models.URLField(blank=True)
+
+    class Meta:
+        '''additional data about this form'''
+        model = User
+        fields = ['first_name', 'last_name', 'birthdate', 'weight', 'height', 'city', 'email', 'profile_picture']
+
+class UpdateUserForm(forms.ModelForm):
+    '''A form to update a Profile object.'''
+    first_name = forms.CharField(label="First Name", required=True)
+    last_name = forms.CharField(label="Last Name", required=True)
+    birthdate = forms.DateField(widget=forms.SelectDateWidget(years=range(2012,1920,-1),),)
+    weight = forms.CharField(label="Weight (lbs)", required=True)
+    height = forms.CharField(label="Height (ft, in)", required=True)
+    city = forms.CharField(label="City", required=True)
+    email = forms.CharField(label="Email Address (or n/a)", required=True)
+    profile_picture = forms.CharField(label="Profile Picture URL", required=True)    
+
+    class Meta:
+        '''additional data about this form'''
+        model = User
+        fields = ['first_name', 'last_name', 'birthdate', 'weight', 'height', 'city', 'email', 'profile_picture']
+
+class CreateScheduleForm(forms.ModelForm):
+    '''A form to create a Schedule object.'''
+    weekday_choices= [
+    ('SU', 'Sunday'),
+    ('MO','Monday'),
+    ('TU', 'Tuesday'),
+    ('WE', 'Wednesday'),
+    ('TH', 'Thursday'),
+    ('FR', 'Friday'),
+    ('SA', 'Saturday')
+    ]
+    weekday = forms.ChoiceField(choices = weekday_choices)
+    # weekday=forms.CharField(label='Select day of week:')
+    # widget=forms.Select(choices=weekday_choices)
+
+    start_time = forms.TimeField()
+    end_time = forms.TimeField()
+    exercise = forms.ModelMultipleChoiceField(
+        queryset=Exercise.objects.all(),
+        widget=forms.CheckboxSelectMultiple
+    )
+
+    class Meta:
+        '''Additional data about this form'''
+        model = Schedule
+        fields = ['weekday', 'exercise', 'start_time', 'end_time']
+
+class UpdateScheduleForm(forms.ModelForm):
+    '''A form to update a Profile object.'''
+    weekday_choices= [
+    ('SU', 'Sunday'),
+    ('MO','Monday'),
+    ('TU', 'Tuesday'),
+    ('WE', 'Wednesday'),
+    ('TH', 'Thursday'),
+    ('FR', 'Friday'),
+    ('SA', 'Saturday')
+    ]
+    weekday = forms.ChoiceField(choices = weekday_choices)
+    # weekday=forms.CharField(label='Select day of week:')
+    # widget=forms.Select(choices=weekday_choices)
+
+    start_time = forms.TimeField()
+    end_time = forms.TimeField()
+        
+    class Meta:
+        '''Additional data about this form'''
+        model = Schedule
+        fields = ['weekday', 'exercise', 'start_time', 'end_time']

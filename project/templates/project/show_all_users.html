@@ -18,7 +18,7 @@
     </b>
     {% for user in users %}
         <tr>
-            <td><a href="{% url 'show_user_page' user.pk%}" >{{user.first_name}} {{user.last_name}}</a></td>
+            <td><a href="{% url 'show_user_page' user.pk%}">{{user.first_name}} {{user.last_name}}</a></td>
             <td>{{user.birthdate}}</td>
             <td>{{user.weight}}lbs</td>
             <td>{{user.height}}</td>
@@ -29,5 +29,9 @@
     {% endfor %}
 </table>
 
+<h3>Don't see your name?</h3>
+<form action="{% url 'create_user' %}">
+    <input type="submit" value="Add User">
+</form>
 
 {% endblock %}

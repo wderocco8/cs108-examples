@@ -1,8 +1,73 @@
 <!-- project/show_user_page.html -->
 {% extends 'project/base.html' %}
 {% block content %}
-
-Days of week template......
+<html>
 <h1>{{user.first_name}}'s Weekly Planner</h1>
+<img src="{{user.profile_picture}}" style="max-width: 300;"></br>
+<a href="{% url 'update_user' user.pk%}">Edit this user</a>
+</br>
+
+<head><style>
+    table, th, td {
+        border: 1px solid black;
+      }
+    
+</style></head>
+
+<table>
+    <tr>
+        <th>Weekday</th>
+        <th>Exercise</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Action</th>
+    </tr>
+{% for workout in user.get_schedule %}
+<tr>
+    <td>
+        {{workout.get_weekday_display}}
+    </td>
+    <td>
+        {% for exercise in workout.get_exercises %}
+        <ul class="list-group">
+            <li class="list-group-item">{{exercise.exercise_name}} <img src="{{exercise.image}}" style="max-width: 100;"></li>
+        </ul>
+        {% endfor %}    
+    </td>
+    <td>
+        {{workout.start_time}}
+    </td>
+    <td>
+        {{workout.end_time}}
+    </td>
+    
+    <td>
+        <a href="{% url 'update_schedule' workout.pk%}">Update</a> | <a href="{% url 'delete_schedule' user_pk=user.pk schedule_pk=workout.pk %}">Delete</a>
+
+    </td>
+    
+</tr>
+{% endfor %}   
+</table>
+
+</br>
+<hr>
+
+<h3>Add New Schedule</h3>
+<form method="POST" action="/project/users/{{user.pk}}/create_schedule" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{create_schedule_form.as_table}}
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Add">
+            </td>
+        </tr>
+    </table>
+</form>
+
+</html>
+
 
 {% endblock %}

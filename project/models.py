@@ -22,8 +22,14 @@ class Exercise(models.Model):
 
         return f'{self.exercise_name}'
 
+    def get_absolute_url(self):
+        '''Provide a url to show this object.'''
+
+        return reverse('show_all_exercises') # note: should have page to show 1 exercise, after creating exercise, specify success url in create view
+
+
 class User(models.Model):
-    '''Represents a User involving first/last name , birthdate, weight, height, city, email, profile picture.'''
+    '''Represents a User involving first/last name, birthdate, weight, height, city, email, profile picture.'''
     first_name = models.TextField(blank=True)
     last_name = models.TextField(blank=True)
     birthdate = models.DateField(null=True, blank=True)
@@ -38,13 +44,51 @@ class User(models.Model):
 
         return f'{self.first_name} {self.last_name}'
 
+    def get_absolute_url(self):
+        '''Provide a url to show this object.'''
+
+        # return reverse('show_all_users')
+        return reverse('show_user_page', kwargs={'pk':self.pk})
+
+    def get_schedule(self):
+        'Retreive schedule items for user'
+
+        # use the object manager to filter schedule by this profile's pk:
+        return Schedule.objects.filter(user=self)
+
+
+    # def get_possible_exercises(self):
+    #     'Retreive a list of possible exercises for a user'
+
+    #     return Exercise.objects.filter(exercise=self)
+
 
 
 class Schedule(models.Model):
     '''Represents a Schedule which relates exercises and users while including weekday, start/end time, total time'''
     exercise = models.ManyToManyField("Exercise", blank=True) # allow any Schedule object to have various Exercise objects
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    weekday = models.TextField(blank=True)
+    SUNDAY = 'SU'
+    MONDAY = 'MO'
+    TUESDAY = 'TU'
+    WEDNESDAY = 'WE'
+    THURSDAY = 'TH'
+    FRIDAY = 'FR'
+    SATURDAY = 'SA'
+    weekday_choices = [
+        (SUNDAY, 'Sunday'),
+        (MONDAY,'Monday'),
+        (TUESDAY, 'Tuesday'),
+        (WEDNESDAY, 'Wednesday'),
+        (THURSDAY, 'Thursday'),
+        (FRIDAY, 'Friday'),
+        (SATURDAY, 'Saturday')
+    ]
+    weekday = models.CharField(
+        max_length=2,
+        choices=weekday_choices, 
+        default=SUNDAY,
+    )
     start_time = models.TimeField()
     end_time = models.TimeField()
     # total_time = 
@@ -52,4 +96,15 @@ class Schedule(models.Model):
     def __str__(self):
         '''Return the string representation of Status Message.'''
         
-        return f'{self.exercise} {self.user} {self.weekday}'
+        return f'{self.user} {self.weekday}'
+
+    def get_absolute_url(self):
+        '''Provide a url to show this object.'''
+
+        # return reverse('show_all_users')
+        return reverse('show_user_page', kwargs={'pk':self.pk})
+
+    def get_exercises(self):
+        '''Returns all the exercises for a Schedule.'''
+        
+        return self.exercise.all()

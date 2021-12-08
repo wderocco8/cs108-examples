@@ -1,7 +1,7 @@
-<!-- project/create_exercise_form.html -->
+<!-- project/create_user_form.html -->
 {% extends 'project/base.html' %}
 {% block content %}
-<h1>Create a new exercise</h1>
+<h1>Create a new user</h1>
 
 <form method="POST">
     {% csrf_token %}
@@ -11,7 +11,7 @@
         <tr>
             <td></td> <!-- empty! -->
             <td>
-                <input type="submit" value="Add an exercise">
+                <input type="submit" value="Add User">
             </td>
         </tr>
     </table>

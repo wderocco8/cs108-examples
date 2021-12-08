@@ -1,9 +1,9 @@
-<!-- project/create_exercise_form.html -->
+<!-- project/create_schedule_form.html -->
 {% extends 'project/base.html' %}
 {% block content %}
-<h1>Create a new exercise</h1>
+<h1>New Schedule for {{user.first_name}}</h1>
 
-<form method="POST">
+<form method="POST" action="{% url 'create_schedule' user.pk %}">
     {% csrf_token %}
     <!-- display the form context variable -->
     <table>
@@ -11,7 +11,7 @@
         <tr>
             <td></td> <!-- empty! -->
             <td>
-                <input type="submit" value="Add an exercise">
+                <input type="submit" value="Add Schedule">
             </td>
         </tr>
     </table>

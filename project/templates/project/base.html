@@ -1,11 +1,18 @@
 <!-- project/base.html -->
-
 <html>
+    <head>
+        <title>Project Application</title>
+        <link rel="stylesheet" 
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+
 <h3>Workout Planner</h3>
     <body>
+    <header>
         <a href="{% url 'home_page' %}">Project Home</a> | 
         <a href="{% url 'all_users' %}">Find Customers</a> | 
         <a href="{% url 'show_all_exercises' %}">Exercises</a> | 
+    </header>
 <hr>
     </br></br>
     

@@ -3,8 +3,13 @@
 {% block content %}
 
 <h1>Select Your Exercises!</h1>
-<a href="{% url 'create_exercise' %}">Create Exercise</a>
+<head><style>
+table, th, td {
+    border: 1px solid black;
+    background-color: rgb(167, 209, 216);
+  }
 
+</style></head>
 <table>
     <b>
         <tr>
@@ -14,12 +19,9 @@
             <th>Image</th>
             <th>Recommended Reps</th>
             <th>Muscle Groups</th>
+            <th></th>
         </tr>    
-    </b>
-    {% for exercise in exercises %}
-    <form method="POST">
-    {% csrf_token %}
-    
+        {% for exercise in exercises %}
         <tr>
             <td>{{exercise.exercise_name}}</td>
             <td>{{exercise.description}}</td>
@@ -28,11 +30,20 @@
             <td>{{exercise.recommended_reps}}</td>
             <td>{{exercise.muscle_groups}}</td>
             <td>
-                <input type="submit" value="Add Exercise">
-            </td>
+                <a href="{% url 'update_exercise' exercise.pk %}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Update</a>
+                <!-- <a href="{% url 'update_exercise' exercise.pk %}">Update</a></br> -->
+            </td>        
         </tr>
-    </form>
-    {% endfor %}
+        {% endfor %}
 </table>
+
+
+
+
+<h3>Don't see your favorite exercise?</h3>
+<div class="alert alert-primary" role="alert">
+    Click <a href="{% url 'create_exercise' %}">here</a> to add an exercise.
+  </div>
+<!-- <a href="{% url 'create_exercise' %}">Create Exercise</a> -->
 
 {% endblock %}

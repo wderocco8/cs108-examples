@@ -4,8 +4,8 @@ from .models import *
 class CreateExerciseForm(forms.ModelForm):
     '''A form to create a Profile object.'''
     exercise_name = forms.CharField(label="Exercise Name", required=True)
-    description = forms.CharField(label="Description", required=True)
-    instructions = forms.CharField(label="Instructions", required=True)
+    description = forms.CharField(widget=forms.Textarea, required=True)
+    instructions = forms.CharField(widget=forms.Textarea, required=True)
     image_url = forms.CharField(label="Image (or GIF) URL", required=True)    
     recommended_reps = forms.CharField(label="Reccomended Reps", required=True)
     muscle_groups = forms.CharField(label="Muscle Groups", required=True)
@@ -20,8 +20,8 @@ class CreateExerciseForm(forms.ModelForm):
 class UpdateExerciseForm(forms.ModelForm):
     '''A form to update a Exercise object.'''
     exercise_name = forms.CharField(label="Exercise Name", required=True)
-    description = forms.CharField(label="Description", required=True)
-    instructions = forms.CharField(label="Instructions", required=True)
+    description = forms.CharField(widget=forms.Textarea, required=True)
+    instructions = forms.CharField(widget=forms.Textarea, required=True)
     image = forms.CharField(label="Image (or GIF) URL", required=True)
     recommended_reps = forms.CharField(label="Recommended Reps", required=True)
     muscle_groups = forms.CharField(label="Muscle Groups", required=True)
@@ -34,14 +34,14 @@ class UpdateExerciseForm(forms.ModelForm):
 
 class CreateUserForm(forms.ModelForm):
     '''A form to create a User object.'''
-    first_name = models.TextField(blank=True)
-    last_name = models.TextField(blank=True)
-    birthdate = models.DateField(null=True, blank=True)
-    weight = models.TextField(blank=True)
-    height = models.TextField(blank=True)
-    city = models.TextField(blank=True)
-    email = models.TextField(blank=True)
-    profile_picture = models.URLField(blank=True)
+    first_name = forms.CharField(label="First Name", required=True)
+    last_name = forms.CharField(label="Last Name", required=True)
+    birthdate = forms.DateField(label="Birthdate", required=True)
+    weight = forms.CharField(label="Weigth (lbs)", required=True)
+    height = forms.CharField(label="Height (ft, in)", required=True)
+    city = forms.CharField(label="City", required=True)
+    email = forms.CharField(label="Email", required=True)
+    profile_picture = forms.URLField(label="Profile Picture URL", required=True)
 
     class Meta:
         '''additional data about this form'''

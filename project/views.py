@@ -1,3 +1,8 @@
+# File: project/views.py
+# Name: William De Rocco (wderocco@bu.edu)
+# Description: file to create all views
+
+
 from django.db.models.query import QuerySet
 from django.shortcuts import render
 from project.models import Exercise, User, Schedule

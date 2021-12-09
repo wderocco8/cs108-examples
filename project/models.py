@@ -1,3 +1,8 @@
+# File: project/models.py
+# Name: William De Rocco (wderocco@bu.edu)
+# Description: file to create models
+
+
 from django.db import models
 
 # Create your models here.

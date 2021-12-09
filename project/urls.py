@@ -1,4 +1,7 @@
-# project/urls.py
+# File: project/urls.py
+# Name: William De Rocco (wderocco@bu.edu)
+# Description: file to create URL paths
+
 
 from django.urls import path
 from .views import *

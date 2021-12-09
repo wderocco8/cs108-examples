@@ -1,3 +1,8 @@
+# File: project/apps.py
+# Name: William De Rocco (wderocco@bu.edu)
+# Description: file to configure app
+
+
 from django.apps import AppConfig
 
 

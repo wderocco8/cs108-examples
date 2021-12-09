@@ -81,9 +81,9 @@ class UpdateUserView(UpdateView):
 
 class UpdateExerciseView(UpdateView):
     '''Update a USer to store in the database.'''
-    model = Exercise
-    form_class = UpdateExerciseForm
-    template_name = "project/update_exercise_form.html"
+    model = Exercise                                    # retrieve Exercise objects from the database
+    form_class = UpdateExerciseForm                     # which form to use to update User
+    template_name = "project/update_exercise_form.html" # delegate the display to this template
 
 def create_schedule(request, pk):
     '''
@@ -122,15 +122,56 @@ def create_schedule(request, pk):
 
 class UpdateScheduleView(UpdateView):
     '''Update a Schedule to store in the database.'''
-    model = Schedule
+    # model = Schedule
+    # form_class = UpdateScheduleForm
+    # template_name = "project/update_schedule_form.html"
+    
+    # obtain all schedule objects
+    QuerySet = Schedule.objects.all()
+    # identify form to submit to
     form_class = UpdateScheduleForm
+    # identify template to redirect to
     template_name = "project/update_schedule_form.html"
+
+    def get_context_data(self, **kwargs):
+        '''Return the context data (a dictionary) to be used in the template.'''
+
+        # obtain the default context data (a dictionary) from the superclass; 
+        # this will include the User record to display for this page view
+        context = super(UpdateScheduleView, self).get_context_data(**kwargs)
+        schedule = Schedule.objects.get(pk=self.kwargs['schedule_pk'])
+        context['schedule'] = schedule
+        # return this context dictionary
+        return context
+
+    def get_object(self):
+        '''Return the schedule of an object that should be deleted'''
+        # read the URL data values into variables
+        user_pk = self.kwargs['user_pk']
+        schedule_pk = self.kwargs['schedule_pk']
+
+        schedule_update = Schedule.objects.get(pk=schedule_pk)
+
+        # find the Schedule object, and return it        
+        return schedule_update
+
+    def get_success_url(self):
+        '''Provide a URL for after a schedule is deleted'''
+        # read the URL data values into variables
+        user_pk = self.kwargs['user_pk']
+        schedule_pk = self.kwargs['schedule_pk']
+
+
+        # reverse to show the person page
+        return reverse('show_user_page', kwargs={'pk':user_pk})
 
 
 
 class DeleteScheduleView(DeleteView):
     '''View to delete a schedule.'''
+    # get all schedule objects
     QuerySet = Schedule.objects.all()
+    # identify template to submit to
     template_name = "project/delete_schedule_form.html"
 
     def get_context_data(self, **kwargs):

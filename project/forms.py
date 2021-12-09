@@ -66,6 +66,7 @@ class UpdateUserForm(forms.ModelForm):
 
 class CreateScheduleForm(forms.ModelForm):
     '''A form to create a Schedule object.'''
+    # create a list of weekdays which can be accessed using a forms.ChoiceField and associated with the attribute 'weekday'
     weekday_choices= [
     ('SU', 'Sunday'),
     ('MO','Monday'),
@@ -93,6 +94,7 @@ class CreateScheduleForm(forms.ModelForm):
 
 class UpdateScheduleForm(forms.ModelForm):
     '''A form to update a Profile object.'''
+    # create a list of weekdays which can be accessed using a forms.ChoiceField and associated with the attribute 'weekday'
     weekday_choices= [
     ('SU', 'Sunday'),
     ('MO','Monday'),

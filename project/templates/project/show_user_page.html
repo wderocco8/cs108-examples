@@ -1,4 +1,7 @@
 <!-- project/show_user_page.html -->
+<!-- Author: William De Rocco (wderocco@bu.edu) -->
+<!-- Description: template to display a user -->
+
 {% extends 'project/base.html' %}
 {% block content %}
 <html>
@@ -43,7 +46,7 @@
     </td>
     
     <td>
-        <a href="{% url 'update_schedule' workout.pk%}">Update</a> | <a href="{% url 'delete_schedule' user_pk=user.pk schedule_pk=workout.pk %}">Delete</a>
+        <a href="{% url 'update_schedule' user_pk=user.pk schedule_pk=workout.pk %}">Update</a> | <a href="{% url 'delete_schedule' user_pk=user.pk schedule_pk=workout.pk %}">Delete</a>
 
     </td>
     

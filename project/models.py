@@ -25,7 +25,7 @@ class Exercise(models.Model):
     def get_absolute_url(self):
         '''Provide a url to show this object.'''
 
-        return reverse('show_all_exercises') # note: should have page to show 1 exercise, after creating exercise, specify success url in create view
+        return reverse('show_all_exercises')
 
 
 class User(models.Model):
@@ -57,17 +57,13 @@ class User(models.Model):
         return Schedule.objects.filter(user=self)
 
 
-    # def get_possible_exercises(self):
-    #     'Retreive a list of possible exercises for a user'
-
-    #     return Exercise.objects.filter(exercise=self)
-
 
 
 class Schedule(models.Model):
     '''Represents a Schedule which relates exercises and users while including weekday, start/end time, total time'''
     exercise = models.ManyToManyField("Exercise", blank=True) # allow any Schedule object to have various Exercise objects
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE) # each schedule is associated with one User object.
+    # create a list of weekdays which can be accessed using a forms.ChoiceField and associated with the attribute 'weekday'
     SUNDAY = 'SU'
     MONDAY = 'MO'
     TUESDAY = 'TU'
@@ -90,16 +86,15 @@ class Schedule(models.Model):
         default=SUNDAY,
     )
     start_time = models.TimeField()
-    end_time = models.TimeField()
-    # total_time = 
+    end_time = models.TimeField() 
 
     def __str__(self):
-        '''Return the string representation of Status Message.'''
+        '''Return the string representation of user and weekday.'''
         
         return f'{self.user} {self.weekday}'
 
     def get_absolute_url(self):
-        '''Provide a url to show this object.'''
+        '''Provide a url to show this object which will redirect to showing all users page.'''
 
         # return reverse('show_all_users')
         return reverse('show_user_page', kwargs={'pk':self.pk})

@@ -9,9 +9,9 @@ from django.urls import reverse
 # Create your views here.
 class HomePageView(ListView):
     '''Displays home page of website'''
-    model = Exercise                    # retrieve Exercise objects from the database
-    template_name = "project/home.html" # delegate the display to this template
-    context_object_name = "exercises"   # use this variable name in the template
+    model = Exercise                                  # retrieve Exercise objects from the database
+    template_name = "project/home.html"               # delegate the display to this template
+    context_object_name = "exercises"                 # use this variable name in the template
 
 class ShowAllExercisesView(ListView):
     '''Shows a list of all possible exercises to add to planner.'''
@@ -21,21 +21,27 @@ class ShowAllExercisesView(ListView):
 
 class ShowAllUsersView(ListView):
     '''Shows a list of all current users'''
-    model = User                                  # retrieve User objects from the database
-    template_name = "project/show_all_users.html" # delegate the display to this template
-    context_object_name = "users"                 # use this variable name in the template
+    model = User                                     # retrieve User objects from the database
+    template_name = "project/show_all_users.html"    # delegate the display to this template
+    context_object_name = "users"                    # use this variable name in the template
 
 class CreateUserView(CreateView):
     '''Create a new user to store in the database.'''
-    model = User
-    form_class = CreateUserForm
-    template_name = "project/create_user_form.html"
+    model = User                                     # retrieve User objects from the database
+    form_class = CreateUserForm                      # delegate the display to this template
+    template_name = "project/create_user_form.html"  # use this variable name in the template
+    
+    def get_success_url(self):
+        '''Provide a url to show this object to direct back to page showing all users.'''
+
+        return reverse('all_users')
+
 
 class ShowUserPageView(DetailView):
     '''Shows a list of days of which user can select to choose exercises for each day.'''
-    model = User
-    template_name = "project/show_user_page.html"
-    context_object_name = "user"
+    model = User                                    # retrieve User objects from the database
+    template_name = "project/show_user_page.html"   # delegate the display to this template
+    context_object_name = "user"                    # use this variable name in the template
 
     def get_context_data(self, **kwargs):
         '''Return the context data (a dictionary) to be used in the template.'''
@@ -51,9 +57,9 @@ class ShowUserPageView(DetailView):
 
 class ShowNewExerciseView(DetailView):
     '''Shows a new exercise that has just been added.'''
-    model = Exercise
-    template_name = "project/show_new_exercise.html"
-    context_object_name = "exercise"
+    model = Exercise                                    # retrieve Exercise objects from the database
+    template_name = "project/show_new_exercise.html"    # delegate the display to this template
+    context_object_name = "exercise"                    # use this variable name in the template
 
 class CreateExerciseView(CreateView):
     '''Create a new Exercise to store in the database.'''
@@ -62,15 +68,15 @@ class CreateExerciseView(CreateView):
     template_name = "project/create_exercise_form.html" # delegate the display to this template
 
     def get_success_url(self):
-        '''Provide a url to show this object.'''
+        '''Provide a url to direct back to a list of all exercises.'''
 
         return reverse('show_all_exercises')
 
 class UpdateUserView(UpdateView):
     '''Update a User to store in the database.'''
-    model = User
-    form_class = UpdateUserForm
-    template_name = "project/update_user_form.html"
+    model = User                                       # retrieve User objects from the database
+    form_class = UpdateUserForm                        # which form to use to update User
+    template_name = "project/update_user_form.html"    # delegate the display to this template
 
 
 class UpdateExerciseView(UpdateView):
@@ -120,8 +126,10 @@ class UpdateScheduleView(UpdateView):
     form_class = UpdateScheduleForm
     template_name = "project/update_schedule_form.html"
 
+
+
 class DeleteScheduleView(DeleteView):
-    '''View to delete a status message'''
+    '''View to delete a schedule.'''
     QuerySet = Schedule.objects.all()
     template_name = "project/delete_schedule_form.html"
 
@@ -137,18 +145,18 @@ class DeleteScheduleView(DeleteView):
         return context
 
     def get_object(self):
-        '''Return the status message of an object that should be deleted'''
+        '''Return the schedule of an object that should be deleted'''
         # read the URL data values into variables
         user_pk = self.kwargs['user_pk']
         schedule_pk = self.kwargs['schedule_pk']
 
-        status = Schedule.objects.get(pk=schedule_pk)
+        schedule_kill = Schedule.objects.get(pk=schedule_pk)
 
-        # find the StatusMessage object, and return it        
-        return status
+        # find the Schedule object, and return it        
+        return schedule_kill
 
     def get_success_url(self):
-        '''Provide a URL for after a status message is deleted'''
+        '''Provide a URL for after a schedule is deleted'''
         # read the URL data values into variables
         user_pk = self.kwargs['user_pk']
         schedule_pk = self.kwargs['schedule_pk']

@@ -2,8 +2,26 @@
 {% extends 'project/base.html' %}
 {% block content %}
 
-<h1>Welcome to Your Personalized Workout Planner!</h1>
+<h1>Welcome to Your Personalized FitWorks Planner!</h1>
 
-Click below to get st
+<head>
+<style>
+    p {
+        margin: auto;
+        width: 50%;
+    }
+</style>
+</head>
+<p>
+    FitWorks is an online workout planner intended to help you track your workouts and achieve your goals.
+    Our website allows you to create a profile, create exercises, and add a daily schedule to your user page. 
+    You can even view other user's schedules. Staying focused on working out while having to remember your
+    schedule for each day, but we are here to help wherever you may be in your fitness journey!
+</p>
+
+
+<div class="alert alert-primary" role="alert">
+    Click <a href="{% url 'all_users' %}">here</a> to get started!
+  </div>
 
 {% endblock %}

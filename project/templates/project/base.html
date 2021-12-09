@@ -1,25 +1,59 @@
 <!-- project/base.html -->
 <html>
-    <head>
-        <title>Project Application</title>
-        <link rel="stylesheet" 
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    </head>
 
-<h3>Workout Planner</h3>
+    <head>
+    <style>
+    .center {
+        text-align: center;
+    }
+    
+    div {
+        margin-top: 50px;
+        margin-bottom: 50px;
+        margin-right: 50px;
+        margin-left: 50px;
+        background-color: rgba(205, 232, 241, 0.692);
+    }
+
+    h1, h2 {
+        text-shadow: 1.75px 1.75px;
+    }
+    
+    body {
+        background-image: url("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-838386570-1544458219.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    </style>
+    </head>
+    <body>
+    <div class="center">
+            <head>
+        <title>FitWorks Project Application</title>
+        <link rel="stylesheet" 
+        href="https://cs-people.bu.edu/wderocco/css/2119_gymso_fitness/css/bootstrap.min.css">
+    </head>
+<!-- https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" -->
+<h2>FitWorks</h2>
     <body>
     <header>
         <a href="{% url 'home_page' %}">Project Home</a> | 
         <a href="{% url 'all_users' %}">Find Customers</a> | 
-        <a href="{% url 'show_all_exercises' %}">Exercises</a> | 
+        <a href="{% url 'show_all_exercises' %}">Exercises</a>
     </header>
 <hr>
     </br></br>
     
         {% block content %}
         {% endblock %}
-    </body>
+
+
 
 <hr>
 Created by William De Rocco (wderocco@bu.edu)
+
+    </div>
+    </body>
+</body>
 </html>

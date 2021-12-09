@@ -6,7 +6,7 @@ class CreateExerciseForm(forms.ModelForm):
     exercise_name = forms.CharField(label="Exercise Name", required=True)
     description = forms.CharField(label="Description", required=True)
     instructions = forms.CharField(label="Instructions", required=True)
-    image_url = forms.CharField(label="Image URL", required=True)    
+    image_url = forms.CharField(label="Image (or GIF) URL", required=True)    
     recommended_reps = forms.CharField(label="Reccomended Reps", required=True)
     muscle_groups = forms.CharField(label="Muscle Groups", required=True)
 
@@ -22,7 +22,7 @@ class UpdateExerciseForm(forms.ModelForm):
     exercise_name = forms.CharField(label="Exercise Name", required=True)
     description = forms.CharField(label="Description", required=True)
     instructions = forms.CharField(label="Instructions", required=True)
-    image = forms.CharField(label="Image URL,", required=True)
+    image = forms.CharField(label="Image (or GIF) URL", required=True)
     recommended_reps = forms.CharField(label="Recommended Reps", required=True)
     muscle_groups = forms.CharField(label="Muscle Groups", required=True)
 

@@ -1,15 +1,18 @@
 <!-- project/show_all_exercises.html -->
 {% extends 'project/base.html' %}
 {% block content %}
-
+<html>
 <h1>Select Your Exercises!</h1>
 <head><style>
-table, th, td {
-    border: 1px solid black;
-    background-color: rgb(167, 209, 216);
-  }
-
+    table, th, td {
+        border: 1px solid black;
+        margin: auto;
+        table-layout: auto;
+        width: 70%;
+    }
 </style></head>
+<body>
+
 <table>
     <b>
         <tr>
@@ -19,7 +22,7 @@ table, th, td {
             <th>Image</th>
             <th>Recommended Reps</th>
             <th>Muscle Groups</th>
-            <th></th>
+            <th>Action</th>
         </tr>    
         {% for exercise in exercises %}
         <tr>
@@ -47,3 +50,6 @@ table, th, td {
 <!-- <a href="{% url 'create_exercise' %}">Create Exercise</a> -->
 
 {% endblock %}
+
+</body>
+</html>

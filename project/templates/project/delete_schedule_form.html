@@ -1,7 +1,12 @@
 <!-- delete_status_form.html -->
 
-{% extends 'mini_fb/base.html' %}
+{% extends 'project/base.html' %}
 {% block content %}
+<head><style>
+    form {
+        display: inline-block;
+      }
+</style></head>
 
 <h2>Are you sure you want to delete this schedule?</h2>
 <form method='POST'>

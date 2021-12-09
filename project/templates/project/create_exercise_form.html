@@ -1,7 +1,13 @@
 <!-- project/create_exercise_form.html -->
 {% extends 'project/base.html' %}
 {% block content %}
-<h1>Create a new exercise</h1>
+<h1>Create a new exercise</h1><br>
+
+<head><style>
+    form {
+        display: inline-block;
+      }
+</style></head>
 
 <form method="POST">
     {% csrf_token %}

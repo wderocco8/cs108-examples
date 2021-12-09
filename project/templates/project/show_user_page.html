@@ -3,13 +3,14 @@
 {% block content %}
 <html>
 <h1>{{user.first_name}}'s Weekly Planner</h1>
-<img src="{{user.profile_picture}}" style="max-width: 300;"></br>
+<img src="{{user.profile_picture}}" style="max-width: 200;"></br>
 <a href="{% url 'update_user' user.pk%}">Edit this user</a>
 </br>
 
 <head><style>
-    table, th, td {
+    table, th, td, ul {
         border: 1px solid black;
+        margin: auto;
       }
     
 </style></head>

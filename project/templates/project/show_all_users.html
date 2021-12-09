@@ -1,8 +1,19 @@
 <!-- project/show_all_users.html -->
 {% extends 'project/base.html' %}
 {% block content %}
+<head>
+<style>
+    table {
+        border-collapse: collapse;
+        text-align: center;
+        width: 100%;
+        margin: auto;
+    }
+</style>
+</head>
 
-<h1>Showing All Customers</h1>
+
+<h1>Showing All Customers</h1></br>
 
 <table>
     <b>
@@ -28,6 +39,7 @@
         </tr>
     {% endfor %}
 </table>
+
 
 <h3>Don't see your name?</h3>
 <form action="{% url 'create_user' %}">

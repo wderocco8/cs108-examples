@@ -1,7 +1,13 @@
 <!-- project/create_user_form.html -->
 {% extends 'project/base.html' %}
 {% block content %}
-<h1>Create a new user</h1>
+<h1>Create a new user</h1></br>
+<html>
+<head><style>
+    form {
+        display: inline-block;
+      }
+</style></head>
 
 <form method="POST">
     {% csrf_token %}
@@ -18,3 +24,4 @@
 </form>
 
 {% endblock %}
+</html>

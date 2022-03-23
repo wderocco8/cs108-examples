@@ -15,11 +15,11 @@
     </b>
     {% for profile in profiles %}
         <tr>
-            <th><a href="{% url 'show_profile_page' profile.pk %}">{{profile.first_name}} {{profile.last_name}}</a></th>
+            <td><a href="{% url 'show_profile_page' profile.pk %}">{{profile.first_name}} {{profile.last_name}}</a></td>
             <!-- <th>{{profile.last_name}}</th> -->
-            <th>{{profile.city}}</th>
-            <th>{{profile.email_address}}</th>
-            <th><img src="{{profile.image_url}}" style="max-width: 200;"></th>
+            <td>{{profile.city}}</td>
+            <td>{{profile.email_address}}</td>
+            <td><img src="{{profile.image_url}}" style="max-width: 200;"></td>
         </tr>
     {% endfor %}
 </table>

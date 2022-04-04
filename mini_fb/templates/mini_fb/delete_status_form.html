@@ -19,12 +19,14 @@
 <table>
 <tr>
     <td>
-        {{st_msg.profile.timestamp.pk}}   
+        {{st_msg.timestamp}}
+        <!-- {{st_msg.profile.timestamp.pk}}    -->
     </td>
     <td>
-        {{profile.get_status_message.message.pk}} </br>
-        {% if profile.get_status_message.image %}
-        <img src='{{profile.get_status_message.image.url}}' style='max-width: 200;'>
+        {{st_msg.profile}} <br>
+        <!-- {{profile.get_status_message.message.pk}}  -->
+        {% if st_msg.image %}
+        <img src='{{st_msg.image.url}}' style='max-width: 200;'>
         {% endif %}
     </td>
 </tr>
